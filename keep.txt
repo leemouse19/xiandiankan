@@ -1,0 +1,9 @@
+-dontobfuscate
+-keep class com.tvshell.moontv.** { *; }
+# X5 SDK 类保留（防止混淆导致内核加载失败）
+-keep class com.tencent.** { *; }
+-keep class com.qweb.** { *; }
+-keep class com.tbs.** { *; }
+-dontwarn com.tencent.**
+-dontwarn com.qweb.**
+-dontwarn com.tbs.**

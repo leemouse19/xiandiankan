@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<style>
+html,body{margin:0;padding:0;background:#000;width:100%;height:100%;overflow:hidden}
+video{position:absolute;left:0;top:0;object-fit:contain;background:#000;display:block}
+</style>
+</head>
+<body>
+<video id="v" playsinline webkit-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto"></video>
+<script src="hls.min.js"></script>
+<script>
+(function(){
+var v=document.getElementById('v');
+var hls=null;
+var err='';
+var fallbackTimer=null;
+/** 直播源 key：用于给代理子请求补 moontv-source 参数。 */
+var SRC='';
+
+function fit(){
+  var w=window.innerWidth||document.documentElement.clientWidth||0;
+  var h=window.innerHeight||document.documentElement.clientHeight||0;
+  if(w>0){v.style.width=w+'px';}
+  if(h>0){v.style.height=h+'px';}
+}
+window.addEventListener('resize',fit);
+fit();
+
+v.addEventListener('error',function(){
+  err='videoerr:'+(v.error?v.error.code:'?');
+});
+v.addEventListener('loadedmetadata',function(){
+  err='';
+});
+
+/**
+ * 自定义 HLS loader：给所有走服务端代理的请求补上 moontv-source 参数。
+ *
+ * 【为什么必须有】上游 /api/proxy/m3u8 在重写 m3u8 内容时，
+ * 把嵌套播放列表写成 /api/proxy/m3u8?url=... 、把分片写成 /api/proxy/segment?url=... ，
+ * **漏掉了 moontv-source**。而服务端这几个路由都靠 moontv-source 找直播源配置
+ * （缺失 → 404 "Source not found"），于是：
+ *   - 子播放列表 404 → hls.js 报 levelLoadError → 直播黑屏
+ *   - 分片 404 → 就算列表过了也拉不到流
+ * 上游网页版用 CustomHlsJsLoader 修掉了同一个问题，这里照做。
+ *
+ * 实现方式：继承 hls.js 默认 loader，在 load() 里改写 context.url。
+ * （不能用 xhrSetup —— 它拿到的是已 open 之后的 XHR，改 URL 会被后面 openAndSendXhr 覆盖。）
+ */
+var MTProxyLoader = null;
+(function(){
+  if(!window.Hls||!Hls.DefaultConfig||!Hls.DefaultConfig.loader) return;
+  var Base = Hls.DefaultConfig.loader;
+  MTProxyLoader = function(config){
+    Base.call(this,config);
+    var self=this;
+    var origLoad = this.load;
+    this.load = function(context, cfg, callbacks){
+      try{
+        if(context && context.url && context.url.indexOf('/api/proxy/')>=0
+              && context.url.indexOf('moontv-source=')<0){
+          var sep = (context.url.indexOf('?')>=0) ? '&' : '?';
+          context.url = context.url + sep + 'moontv-source=' + encodeURIComponent(SRC);
+        }
+      }catch(e){}
+      return origLoad.call(self,context,cfg,callbacks);
+    };
+  };
+  MTProxyLoader.prototype = Object.create(Base.prototype);
+  MTProxyLoader.prototype.constructor = MTProxyLoader;
+})();
+
+function useHlsJs(u){
+  try{
+    if(window.Hls&&Hls.isSupported()){
+      hls=new Hls({
+        maxBufferLength:30,
+        maxMaxBufferLength:60,
+        enableWorker:false,
+        // 【直播关键】上游 /api/proxy/m3u8 重写嵌套播放列表与分片时，
+        // 只写了 /api/proxy/segment?url=... 与 /api/proxy/m3u8?url=... ，
+        // 把 moontv-source 参数丢了。
+        // 而服务端 segment / key / 子 m3u8 路由都要靠 moontv-source
+        // 定位直播源（缺失直接 404 "Source not found"）→ 子播放列表加载失败，
+        // 表现为 hlserr:levelLoadError（黑屏无画面）。
+        //
+        // 这里用自定义 loader 给所有代理请求补上该参数，
+        // 与上游网页版的 CustomHlsJsLoader 做法一致。
+        loader:MTProxyLoader
+      });
+      hls.loadSource(u);
+      hls.attachMedia(v);
+      hls.on(Hls.Events.MANIFEST_PARSED,function(){playNow();});
+      hls.on(Hls.Events.ERROR,function(e,d){err='hlserr:'+(d&&d.details);});
+      return true;
+    }
+  }catch(e){ err='hlsinit:'+e; }
+  return false;
+}
+
+function playNow(){
+  var p=v.play();
+  if(p&&p.catch){p.catch(function(e){err='playrej:'+e;});}
+}
+
+function mtLoad(u,useJs,src){
+  err='';
+  try{ if(hls){hls.destroy();hls=null;} }catch(e){}
+  try{ if(fallbackTimer){clearTimeout(fallbackTimer);fallbackTimer=null;} }catch(e){}
+  if(!u){return;}
+  // 直播源 key：用于给服务端代理的子请求补 moontv-source 参数
+  SRC = src||'';
+  // 直播代理地址形如 /api/proxy/m3u8?url=... ，不以 .m3u8 结尾，
+  // 但服务端返回的 Content-Type 是 mpegurl，同样按 HLS 处理。
+  // /live/m3u8?... 是 App 本地代理的直连通路（绕开站点鉴权），同样按 HLS 处理。
+  var isHls=/\.m3u8(\?|$)/i.test(u)||/\/api\/proxy\/m3u8/i.test(u)||/\/live\/m3u8/i.test(u);
+  if(isHls && useJs){
+    // 直播：直接用 hls.js（上游网页版同样只用 hls.js，且代理已带 CORS 头）
+    useHlsJs(u);
+  }else if(isHls){
+    // X5(TBS) 内核原生支持 HLS：先用 <video src> 直连，避开 hls.js 的跨域 CORS 限制
+    v.src=u;
+    playNow();
+    fallbackTimer=setTimeout(function(){
+      if(!err&&v.readyState<1){
+        err='nativehls_timeout';
+        useHlsJs(u);
+      }
+    },6000);
+  }else{
+    v.src=u;
+    playNow();
+  }
+}
+
+window.MTPlay={
+  load:mtLoad,
+  play:playNow,
+  pause:function(){v.pause();},
+  seek:function(t){try{v.currentTime=t;}catch(e){}},
+  getPos:function(){return v.currentTime||0;},
+  getDur:function(){return isFinite(v.duration)?v.duration:0;},
+  isPaused:function(){return v.paused;}
+};
+
+window.MTState=function(){
+  var p=0,d=0,pa=1;
+  try{p=v.currentTime||0;}catch(e){}
+  try{d=isFinite(v.duration)?v.duration:0;}catch(e){}
+  try{pa=v.paused?1:0;}catch(e){}
+  var rs=0;
+  try{rs=v.readyState||0;}catch(e){}
+  return p+'|'+d+'|'+pa+'|'+(err||'')+'|'+rs+'|'+v.src;
+};
+})();
+</script>
+</body>
+</html>

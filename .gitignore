@@ -1,0 +1,17 @@
+# Build artifacts
+obj/
+dex/
+out/
+gen/
+
+# Logs
+*.log
+javac_build.log
+/tmp/d8_build.log
+
+# Diagnostic
+diag_device.txt
+
+# IDE
+.idea/
+*.iml

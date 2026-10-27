@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">享看电影</string>
+    <string name="splash_loading">正在加载内核…</string>
+    <string name="splash_fallback">内核加载较慢，正在使用系统内核</string>
+    <string name="net_error_title">加载失败</string>
+    <string name="net_error_retry">点击重试</string>
+</resources>

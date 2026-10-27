@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 直播频道格子：选中态明显（黄描边）。
+     注意：格子本身**不设 focusable** —— GridView 子项可聚焦时 selection 不跟随焦点，
+     遥控按不动也滚不动。现在由 App 自己管选中项（LiveActivity.mSel），
+     用 state_selected 画高亮。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/sel_channel"
+    android:gravity="center_horizontal"
+    android:padding="6dp"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/ch_logo"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/ch_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:textColor="@color/moontv_text"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+</LinearLayout>

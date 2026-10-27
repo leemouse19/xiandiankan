@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 按钮：带 focused / pressed 态，遥控下必须看得出焦点在哪 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF5252" />
+            <stroke android:width="3dp" android:color="#FFD54F" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#B71C1C" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#E53935" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页（菜单式）：
+     一次只显示一类内容（继续观看 / 我的收藏 / 豆瓣推荐 / 经典Top250），
+     海报网格分页 —— 一页只渲染这一批，翻页才显示下一批，节省内存。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/moontv_bg">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="享看电影"
+            android:textColor="@color/moontv_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp" />
+
+        <EditText
+            android:id="@+id/search_box"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/moontv_text"
+            android:textColorHint="@color/moontv_text_dim"
+            android:hint="搜索影片 / 剧集"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="搜索"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="收藏"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_live"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="直播"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:text="退出"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+    <!-- 菜单：一次只显示一类内容 -->
+    <LinearLayout
+        android:id="@+id/home_menu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="2dp" />
+
+    <!-- 豆瓣筛选条：类型 / 类别 / 年度（只在「豆瓣推荐」菜单下显示） -->
+    <include layout="@layout/view_filter_bar"
+        android:id="@+id/filter_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <GridView
+            android:id="@+id/home_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="auto_fit"
+            android:columnWidth="130dp"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="10dp"
+            android:stretchMode="columnWidth"
+            android:padding="8dp"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/home_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/moontv_text_dim"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/home_loading"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/moontv_primary"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- 翻页条 -->
+    <include layout="@layout/view_page_bar"
+        android:id="@+id/page_bar" />
+</LinearLayout>

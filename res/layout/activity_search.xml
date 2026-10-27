@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/moontv_bg">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="返回"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <EditText
+            android:id="@+id/search_box"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/moontv_text"
+            android:textColorHint="@color/moontv_text_dim"
+            android:hint="搜索影片 / 剧集"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:text="搜索"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="auto_fit"
+        android:columnWidth="122dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="16dp"
+        android:stretchMode="columnWidth"
+        android:padding="14dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/moontv_text_dim"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>

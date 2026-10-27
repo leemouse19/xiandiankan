@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 直播页：顶部直播源切换 + 频道网格 + 当前频道 EPG 节目单 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/moontv_bg">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="返回"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:text="↻"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary"
+            android:layout_marginStart="8dp"
+            android:tooltipText="刷新直播源" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="直播"
+            android:textColor="@color/moontv_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/live_loading"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:indeterminateTint="@color/moontv_primary" />
+    </LinearLayout>
+
+    <!-- 直播源切换 -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <LinearLayout
+            android:id="@+id/live_sources"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/live_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@color/moontv_text_dim"
+        android:textSize="13sp" />
+
+    <!-- 可切换的直播源信息：名称 / 速度 / 片源分辨率，点一下直接切 -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp">
+
+        <LinearLayout
+            android:id="@+id/live_source_info"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+
+    <!-- 频道网格 -->
+    <GridView
+        android:id="@+id/live_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="5"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"
+        android:padding="8dp"
+        android:scrollbars="none" />
+
+    <!-- 当前频道 EPG 节目单 -->
+    <TextView
+        android:id="@+id/live_epg_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:textColor="@color/moontv_accent"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scrollbars="none"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/live_epg_list"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+</LinearLayout>

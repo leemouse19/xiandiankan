@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 卡片焦点态：亮黄描边 + 提亮底色，TV 遥控下必须一眼看清 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#2A3038" />
+    <stroke android:width="3dp" android:color="#FFD54F" />
+    <corners android:radius="6dp" />
+</shape>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 享看电影 Android 原生应用：minSdk24，内置腾讯X5内核（仅用于视频渲染面），界面与数据全部原生 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tvshell.moontv"
+    android:versionCode="106"
+    android:versionName="1.105">
+
+    <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application
+        android:name="com.tvshell.moontv.MoontvApp"
+        android:label="享看电影"
+        android:icon="@drawable/ic_launcher"
+        android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.Moontv"
+        android:supportsRtl="true"
+        android:largeHeap="true">
+
+        <!-- 原生登录界面（接口方式，不依赖 H5 登录页） -->
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 原生搜索页 -->
+        <activity
+            android:name=".SearchActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 原生详情 / 选集页 -->
+        <activity
+            android:name=".DetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+
+        <!-- 原生直播页（LunaTV /api/live，直播源 + 频道 + 节目单） -->
+        <activity
+            android:name=".LiveActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+
+        <!-- 原生播放器（X5 渲染面 + 原生控制条，强制横屏） -->
+        <activity
+            android:name=".PlayerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+
+        <!-- 原生首页（内部启动，由 Splash 拉起） -->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout|uiMode"
+            android:launchMode="singleTask"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+
+        <!-- 闪屏 Activity：启动入口，负责 X5 内核初始化与降级决策 -->
+        <activity
+            android:name=".SplashActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:exported="true"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.Moontv.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

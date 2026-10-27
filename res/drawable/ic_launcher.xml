@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- 圆角深色底 -->
+    <path
+        android:fillColor="#0F1115"
+        android:pathData="M4,4 L44,4 Q44,4 44,4 L44,44 Q44,44 44,44 L4,44 Q4,44 4,44 Z M6,6 L42,6 L42,42 L6,42 Z" />
+    <!-- 红色圆环 -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M24,7 A17,17 0 1,0 24,41 A17,17 0 1,0 24,7 Z M24,11 A13,13 0 1,1 24,37 A13,13 0 1,1 24,11 Z" />
+    <!-- 白色播放三角 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,16 L20,32 L34,24 Z" />
+</vector>

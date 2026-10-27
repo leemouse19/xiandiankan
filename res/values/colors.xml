@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色主题（享看电影 主色，避免启动时白屏） -->
+    <color name="moontv_bg">#0F1115</color>
+    <color name="moontv_bg_splash">#0B0D10</color>
+    <color name="moontv_primary">#E53935</color>
+    <color name="moontv_text">#FFFFFF</color>
+    <color name="moontv_text_dim">#9AA0A6</color>
+    <color name="moontv_accent">#FFB300</color>
+    <color name="moontv_green">#66BB6A</color>
+</resources>

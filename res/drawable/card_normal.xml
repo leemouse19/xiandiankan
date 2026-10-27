@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 卡片普通态：几乎不可见的深色底 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#14171C" />
+    <corners android:radius="6dp" />
+</shape>

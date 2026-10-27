@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <FrameLayout
+        android:id="@+id/player_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:gravity="center_vertical"
+        android:background="#99000000"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <TextView
+            android:id="@+id/player_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/moontv_text"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/controls"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:background="#99000000"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上一集"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_playpause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="暂停"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="下一集"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <Button
+            android:id="@+id/btn_eps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="选集"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <!-- 换源：直播=换直播源，点播=换片源线路 -->
+        <Button
+            android:id="@+id/btn_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="换源"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <!-- 线路：直播时手动切换播放通路（站点代理 / App直连 / X5直连） -->
+        <Button
+            android:id="@+id/btn_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            android:text="线路"
+            android:textColor="@color/moontv_text"
+            android:background="@drawable/bg_btn_primary" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="00:00 / 00:00"
+            android:textColor="@color/moontv_text"
+            android:textSize="13sp" />
+
+        <SeekBar
+            android:id="@+id/seek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:max="1000"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+    </LinearLayout>
+</FrameLayout>

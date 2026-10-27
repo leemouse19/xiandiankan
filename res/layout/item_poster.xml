@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
+    android:background="@drawable/card_normal">
+
+    <ImageView
+        android:id="@+id/poster"
+        android:layout_width="118dp"
+        android:layout_height="168dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/poster_normal" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/moontv_text"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/sub"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/moontv_text_dim"
+        android:textSize="11sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+</LinearLayout>

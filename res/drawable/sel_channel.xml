@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 直播频道选中态：App 自主管理选中项（state_selected），黄描边 + 提亮 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#3A3220" />
+            <stroke android:width="3dp" android:color="#FFD54F" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#4A4258" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#242830" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+</selector>

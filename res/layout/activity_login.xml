@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="32dp"
+    android:background="#0F1115">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="享看电影"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#E53935"
+        android:layout_marginTop="64dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录到您的影视库"
+        android:textSize="15sp"
+        android:textColor="#9AA0A6"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp" />
+
+    <EditText
+        android:id="@+id/login_user"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_input"
+        android:hint="用户名"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#5F6368"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:inputType="text"
+        android:singleLine="true"
+        android:layout_marginBottom="14dp" />
+
+    <EditText
+        android:id="@+id/login_pass"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_input"
+        android:hint="密码"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#5F6368"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_btn_primary"
+        android:text="登 录"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/login_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="13sp"
+        android:textColor="#9AA0A6"
+        android:layout_marginTop="16dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/login_web_fallback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="跳过登录，先进入首页（接口需登录时才有用）"
+        android:textSize="13sp"
+        android:textColor="#5B8DEF"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/login_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清除登录信息 / 切换账号"
+        android:textSize="13sp"
+        android:textColor="#9AA0A6"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+</LinearLayout>

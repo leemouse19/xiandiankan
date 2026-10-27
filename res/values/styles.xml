@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主主题：无 ActionBar，深色，覆盖全屏，避免白屏闪烁 -->
+    <style name="Theme.Moontv" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/moontv_bg</item>
+        <item name="android:statusBarColor">@color/moontv_bg</item>
+        <item name="android:navigationBarColor">@color/moontv_bg</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!-- 闪屏主题：全屏、无状态栏、深色背景 -->
+    <style name="Theme.Moontv.Splash" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/moontv_bg_splash</item>
+        <item name="android:statusBarColor">@color/moontv_bg_splash</item>
+        <item name="android:navigationBarColor">@color/moontv_bg_splash</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
